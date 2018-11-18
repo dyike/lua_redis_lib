@@ -1,8 +1,4 @@
 local ipairs, type = ipairs, type
-
-local ngx_null = ngx.null
-
-local tbl_insert = table.insert
 local ok, tbl_new = pcall(require, "table.new")
 if not ok then
     tbl_new = function (narr, nrec) return {} end -- luacheck: ignore 212
@@ -10,7 +6,7 @@ end
 
 
 local _M = {
-    _VERSION = '0.06'
+    _VERSION = '0.0.1'
 }
 
 
@@ -19,7 +15,7 @@ function _M.get_master(sentinel, master_name)
         "get-master-addr-by-name",
         master_name
     )
-    if res and res ~= ngx_null and res[1] and res[2] then
+    if res and res ~= ngx.null and res[1] and res[2] then
         return { host = res[1], port = res[2] }
     else
         return nil, err
@@ -41,7 +37,7 @@ function _M.get_slaves(sentinel, master_name)
 
             if host["master-link-status"] == "ok" then
                 host.host = host.ip -- for parity with other functions
-                tbl_insert(hosts, host)
+                table.insert(hosts, host)
             end
         end
         if hosts[1] ~= nil then
