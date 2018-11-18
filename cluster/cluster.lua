@@ -1,14 +1,15 @@
-local setmetatable = setmetatable
 local redis = require 'resty.redis'
-local rawget = rawget
 local crc16 = require 'crc16'
 local cjson = require 'cjson.safe'
+
+local setmetatable = setmetatable
+local rawget = rawget
 
 -- global var
 node_cache = {}
 
 local _M = {
-    VERSION = '0.00',
+    VERSION = '0.0.1',
     conf = {},
 }
 
